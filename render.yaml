@@ -1,0 +1,10 @@
+version: 2
+services:
+  - type: web
+    name: file-share-app
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
