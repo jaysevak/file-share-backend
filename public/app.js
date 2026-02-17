@@ -77,6 +77,12 @@ uploadBtn.addEventListener('click', async () => {
             body: formData
         });
 
+        // Check if response is JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            throw new Error('Server error. Please try a smaller file or try again later.');
+        }
+
         const result = await response.json();
 
         if (response.ok && result.success) {
