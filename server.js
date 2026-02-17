@@ -31,10 +31,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ 
-    storage: storage,
-    limits: { 
-        fileSize: 500 * 1024 * 1024 // 500MB limit
-    }
+    storage: storage
+    // No file size limit
 });
 
 // In-memory storage for file metadata
@@ -179,8 +177,9 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', activeFiles: fileStore.size });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
-    console.log(`Upload endpoint: http://localhost:${PORT}/upload`);
-    console.log(`Download endpoint: http://localhost:${PORT}/download/:code`);
+    console.log(`Local: http://localhost:${PORT}`);
+    console.log(`Network: http://172.20.80.1:${PORT}`);
+    console.log(`\nAccess from phone: http://172.20.80.1:${PORT}`);
 });
